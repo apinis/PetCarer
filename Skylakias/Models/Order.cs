@@ -16,7 +16,10 @@ namespace Skylakias.Models
 
         [Key, Column(Order = 1)]
         public int ServiceId { get; set; }
-        public int TotalPrice { get; set; }
+
+        [Display(Name = "Total Price")]
+        [Column(TypeName = "money")]
+        public decimal TotalPrice { get; set; }
         public virtual Service Service { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Skylakias.Models;
 
 namespace Skylakias.Controllers
@@ -41,6 +42,10 @@ namespace Skylakias.Controllers
         {
             ViewBag.CustomerId = new SelectList(db.Users, "Id", "Name");
             ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name");
+            var userId = User.Identity.GetUserId();
+            var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
+            ViewBag.Disc = user.MembershipType.DiscountRate;
+
             return View();
         }
 
@@ -51,8 +56,14 @@ namespace Skylakias.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CustomerId,ServiceId,TotalPrice")] Order order)
         {
+
             if (ModelState.IsValid)
             {
+                var userId = User.Identity.GetUserId();
+                var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
+                var disc = user.MembershipType.DiscountRate;
+                var price = order.Service.Price;
+                order.TotalPrice = Math.Round(price - (disc * price), 2);
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -139,13 +140,17 @@ namespace Skylakias.Controllers
             }
         }
 
+       
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.membershipTypes = _context.MembershipTypes.ToList();
-            return View();
+            var model = new RegisterViewModel();
+                model.MembershipTypes = _context.MembershipTypes.ToList();
+            
+            return View(model);
         }
 
         //
@@ -155,9 +160,13 @@ namespace Skylakias.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
+            var membershipType = _context.MembershipTypes.Where(m => m.Name == model.MembershipType.Name).Select(n => n.Id).FirstOrDefault();
+            
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name, MembershipTypeId = 1 };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name, MembershipTypeId = membershipType };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

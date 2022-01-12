@@ -69,6 +69,10 @@ namespace Skylakias.Models
         [StringLength(255)]
         public string Name { get; set; }
 
+        public IEnumerable<MembershipType> MembershipTypes { get; set; }
+
+        public virtual MembershipType MembershipType { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -10,6 +10,7 @@ using Skylakias.Models;
 
 namespace Skylakias.Controllers
 {
+    [AllowAnonymous]
     public class ServicesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

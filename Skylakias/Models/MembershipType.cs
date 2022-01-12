@@ -11,9 +11,10 @@ namespace Skylakias.Models
         
         public int Id { get; set; }
         [Required]
+        [Display(Name = "Membership Type")]
         public string Name { get; set; }
         public int SignUpFee { get; set; }
         public int DurationInMonths { get; set; }
-        public int DiscountRate { get; set; }
+        public decimal DiscountRate { get; set; }
     }
 }

@@ -1,15 +1,24 @@
-﻿@model Skylakias.Models.Customer
+﻿@model Skylakias.Models.ApplicationUser
 @{
-    ViewBag.Title = Model.Name;
+    ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Name</h2>
-<ul>
-    <li>Membership Type: @Model.MembershipType.Name</li>
-    @if (Model.Birthdate.HasValue)
-    {
-        <li>Birthdate: @Model.Birthdate.Value.ToShortDateString()</li>
-    }
-</ul>
+
+<div>
+    <h4>Customers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MembershipType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MembershipType.Name)
+        </dd>
+
+        
+
+    </dl>
+</div>
 
