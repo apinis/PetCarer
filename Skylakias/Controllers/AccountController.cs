@@ -122,6 +122,7 @@ namespace Skylakias.Controllers
                 return View(model);
             }
 
+            
             // The following code protects for brute force attacks against the two factor codes. 
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
@@ -170,10 +171,16 @@ namespace Skylakias.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
                     //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
                     //var roleManager = new RoleManager<IdentityRole>(roleStore);
-                    //await roleManager.CreateAsync(new IdentityRole("CanManageServices"));
-                    //await UserManager.AddToRoleAsync(user.Id, "CanManageServices");
+                    //await roleManager.CreateAsync(new IdentityRole("Staff"));
+                    //await UserManager.AddToRoleAsync(user.Id, "Staff");
+
+                    //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+                    //var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    //await roleManager.CreateAsync(new IdentityRole("Admin"));
+                    //await UserManager.AddToRoleAsync(user.Id, "Admin");
 
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);

@@ -201,6 +201,10 @@
     <Compile Include="Migrations\202201122007334_PriceToService.Designer.cs">
       <DependentUpon>202201122007334_PriceToService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201130901384_SeedStaff.cs" />
+    <Compile Include="Migrations\202201130901384_SeedStaff.Designer.cs">
+      <DependentUpon>202201130901384_SeedStaff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -320,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201122007334_PriceToService.resx">
       <DependentUpon>202201122007334_PriceToService.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201130901384_SeedStaff.resx">
+      <DependentUpon>202201130901384_SeedStaff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -40,13 +40,15 @@ namespace Skylakias.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.Users, "Id", "Name");
-            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name");
-            var userId = User.Identity.GetUserId();
-            var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
-            ViewBag.Disc = user.MembershipType.DiscountRate;
+            //ViewBag.CustomerId = new SelectList(db.Users, "Id", "Name");
+            //ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name");
+            //var userId = User.Identity.GetUserId();
+            //var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
+            //ViewBag.Disc = user.MembershipType.DiscountRate;
 
-            return View();
+            var list = db.Services.ToList();
+
+            return View(list);
         }
 
         // POST: Orders/Create
@@ -54,11 +56,14 @@ namespace Skylakias.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerId,ServiceId,TotalPrice")] Order order)
+        public ActionResult Create(int id)
         {
-
+            
             if (ModelState.IsValid)
             {
+                var service = db.Services.Where(s => s.Id == id).FirstOrDefault();
+                var order = new Order();
+                order.Service = service;
                 var userId = User.Identity.GetUserId();
                 var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
                 var disc = user.MembershipType.DiscountRate;
@@ -69,9 +74,9 @@ namespace Skylakias.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.Users, "Id", "Name", order.ApplicationUserId);
-            ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name", order.ServiceId);
-            return View(order);
+            //ViewBag.CustomerId = new SelectList(db.Users, "Id", "Name", order.ApplicationUserId);
+            //ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name", order.ServiceId);
+            return View("Index");
         }
 
         // GET: Orders/Edit/5
