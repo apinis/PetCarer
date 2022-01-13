@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Skylakias.Models;
 using System.Data.Entity;
+using System.Net;
 
 namespace Skylakias.Controllers
 {
@@ -37,7 +38,19 @@ namespace Skylakias.Controllers
             return View(customer);
         }
 
-        
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = _context.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
 
 
 

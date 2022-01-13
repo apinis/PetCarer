@@ -42,13 +42,16 @@ namespace Skylakias.Controllers
         {
             //ViewBag.CustomerId = new SelectList(db.Users, "Id", "Name");
             //ViewBag.ServiceId = new SelectList(db.Services, "Id", "Name");
-            //var userId = User.Identity.GetUserId();
+            var userId = User.Identity.GetUserId();
+            ViewBag.userid = userId;
             //var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
             //ViewBag.Disc = user.MembershipType.DiscountRate;
 
-            var list = db.Services.ToList();
 
-            return View(list);
+            var list = db.Services.ToList();
+            ViewBag.Services = list;
+
+            return View();
         }
 
         // POST: Orders/Create
@@ -56,19 +59,20 @@ namespace Skylakias.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(int id)
+        public ActionResult Create(string userId, int serviceId)
         {
-            
+
             if (ModelState.IsValid)
             {
-                var service = db.Services.Where(s => s.Id == id).FirstOrDefault();
+
+                var service = db.Services.Where(s => s.Id == serviceId).FirstOrDefault();
                 var order = new Order();
                 order.Service = service;
-                var userId = User.Identity.GetUserId();
-                var user = db.Users.Where(x => x.Id == userId).FirstOrDefault();
-                var disc = user.MembershipType.DiscountRate;
-                var price = order.Service.Price;
-                order.TotalPrice = Math.Round(price - (disc * price), 2);
+
+                var membershipTypeId = db.Users.Where(u => u.Id == userId).FirstOrDefault().MembershipTypeId; 
+                var disc = db.MembershipTypes.Where(m => m.Id == membershipTypeId).FirstOrDefault().DiscountRate;
+
+                order.TotalPrice = Math.Round(service.Price - (disc * service.Price), 2);
                 db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
