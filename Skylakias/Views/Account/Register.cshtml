@@ -21,7 +21,7 @@
         @Html.LabelFor(m => m.MembershipType.Name, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.DropDownListFor(m => m.MembershipType.Name, new SelectList(Model.MembershipTypes,"Name", "Name"),
-    " ", new { @class = "selectpicker" })
+    " ", new { @class = "form-control" })
         </div>
     </div>
 

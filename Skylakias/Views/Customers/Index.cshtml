@@ -21,11 +21,21 @@ else
         <tbody>
             @foreach (var customer in Model)
             {
-                <tr>
-                    <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
-                    <td>@customer.MembershipType.Name</td>
+            <tr>
+                <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+                <td>@customer.MembershipType.Name</td>
+
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = customer.Id })
+                        </td>
+                        }
+                    }
+
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+                    }
+                </tbody>
+            </table>
+        }
