@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerOrderController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -205,6 +206,10 @@
     <Compile Include="Migrations\202201130901384_SeedStaff.Designer.cs">
       <DependentUpon>202201130901384_SeedStaff.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201152141200_OrderDate.cs" />
+    <Compile Include="Migrations\202201152141200_OrderDate.Designer.cs">
+      <DependentUpon>202201152141200_OrderDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -214,6 +219,8 @@
     <Compile Include="Models\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AdminOrdersViewModel.cs" />
+    <Compile Include="ViewModels\CreateOrdersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -302,9 +309,12 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Services\ReadOnlyList.cshtml" />
+    <Content Include="Views\CustomerOrder\Index.cshtml" />
+    <Content Include="Views\CustomerOrder\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AdminOrders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />
@@ -327,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202201130901384_SeedStaff.resx">
       <DependentUpon>202201130901384_SeedStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201152141200_OrderDate.resx">
+      <DependentUpon>202201152141200_OrderDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -22,6 +22,13 @@ namespace Skylakias.Models
         public decimal TotalPrice { get; set; }
         public virtual Service Service { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+        public DateTime? DateStarted { get; set; }
+
+        public Order()
+        {
+            DateStarted = DateTime.Now;
+        }
+
 
     }
 }

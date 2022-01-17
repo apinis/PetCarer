@@ -11,13 +11,21 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
-                @{ if (User.IsInRole("Admin") | User.IsInRole("Staff")) { 
-                <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
-                <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                @{ if (User.IsInRole("Admin") | User.IsInRole("Staff"))
+                    {
+                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
                     }
+                    else
+                    {
+                    <li> @Html.ActionLink("My Orders", "Index", "CustomerOrder")   </li>
+                    <li> @Html.ActionLink("Make an Order", "Create", "CustomerOrder")   </li>
+
+                    }
+
+
                 }
-
-
 
                 <li>@Html.ActionLink("Services", "Index", "Services")</li>
 
